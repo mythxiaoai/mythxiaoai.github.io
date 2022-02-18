@@ -239,14 +239,16 @@ export default [
                 "icon": "fa fa-binoculars",
                 "pid": "",
                 "order": "2"
-            }, {
-                "id": "31",
-                "name": "放大镜",
-                "url": "page/project/bigGlass/index.html",
-                "icon": "fa fa-search",
-                "pid": "30",
-                "order": "3"
-            }, {
+            },
+            //  {
+            //     "id": "31",
+            //     "name": "放大镜",
+            //     "url": "page/project/bigGlass/index.html",
+            //     "icon": "fa fa-search",
+            //     "pid": "30",
+            //     "order": "3"
+            // }, 
+            {
                 "id": "32",
                 "name": "捕鱼游戏(注意有音效)",
                 "url": "page/project/canvas/fish/index.html",
@@ -262,15 +264,15 @@ export default [
             //     "pid": "30",
             //     "order":"2"
             // },
-            // {
-            //     "id": "33",
-            //     "name": "留言板",
-            //     "url": "page/project/QQ/index.html",
-            //     "icon": "fa fa-commenting-o",
-            //     "pid": "30",
-            //     "order": "3"
-            // },
-             {
+            {
+                "id": "33",
+                "name": "留言板",
+                "url": "page/project/QQ/index.html",
+                "icon": "fa fa-commenting-o",
+                "pid": "30",
+                "order": "3"
+            },
+            {
                 "id": "34",
                 "name": "顶置(副导航)",
                 "url": "page/project/top/index.html",
