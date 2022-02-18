@@ -12,48 +12,48 @@ httpServer.listen(80);
 let rm = router();
 app.use(rm.routes());
 
-rm.get("/",async (ctx,next)=>{
- ctx.response.redirect("index.html");
- ctx.response.body = 'OK';
+rm.get("/", async (ctx, next) => {
+  ctx.response.redirect("index.html");
+  ctx.response.body = 'OK';
 })
 
 
-app.use(staticCache("./../src/",{gzip:true}));
+app.use(staticCache("./", { gzip: true }));
 
 let socks = [];
 let users = [];
-wsServer.on("connection",sock=>{
+wsServer.on("connection", sock => {
   socks.push(sock)
-  
-  sock.on("msg",str=>{
-    socks.forEach(sk=>{
-      if(sock!=sk){
-        sk.emit("msg",str,sock.userName)
+
+  sock.on("msg", str => {
+    socks.forEach(sk => {
+      if (sock != sk) {
+        sk.emit("msg", str, sock.userName)
       }
     })
   })
-  sock.on("user",str=>{
-    if(users.indexOf(str)==-1){
+  sock.on("user", str => {
+    if (users.indexOf(str) == -1) {
       users.push(str);
       sock.userName = str;
-      socks.forEach(sk=>{
-        sk.emit("userall",users)
+      socks.forEach(sk => {
+        sk.emit("userall", users)
       })
-      sock.emit("userall",users)
-    }else{
-      sock.emit("user",{id:sock.id,data:"-1"})
+      sock.emit("userall", users)
+    } else {
+      sock.emit("user", { id: sock.id, data: "-1" })
     }
   })
-  sock.on("disconnect",()=>{
+  sock.on("disconnect", () => {
     let index = socks.indexOf(sock);
     let userindex = users.indexOf(sock.userName);
-    if(index!=-1){
-      socks.splice(index,1);
+    if (index != -1) {
+      socks.splice(index, 1);
     }
-    if(userindex!=-1){
-      users.splice(userindex,1);
-       socks.forEach(sk=>{
-        sk.emit("userall",users)
+    if (userindex != -1) {
+      users.splice(userindex, 1);
+      socks.forEach(sk => {
+        sk.emit("userall", users)
       })
     }
   })
