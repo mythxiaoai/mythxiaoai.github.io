@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="raphael.js" charset="utf-8"></script>
+    <style>
+      *{padding: 0;margin: 0;}
+    </style>
+    <script>
+    window.onload=function (){
+      let W = window.innerWidth;
+      let H = window.innerHeight;
+      //react
+      let paper=Raphael(0, 0, W/2, H);
+      let cx=W/3,cy=H/2;
+      let rx=150,ry=50,rs=20;
+      paper.rect(0,0,W,H).attr({'fill':'#282c34','stroke':"none"})
+      paper.path(`M ${cx} ${cy-ry} A ${rx} ${ry} 0 1 1 ${cx} ${cy-ry-0.001}`).attr({'stroke-width': 14, 'stroke': '#61dafb'});
+      paper.path(`M ${cx} ${cy-ry} A ${rx} ${ry} 0 1 1 ${cx} ${cy-ry-0.001}`).attr({'stroke-width': 14, 'stroke': '#61dafb', 'transform': 'r120'});
+      paper.path(`M ${cx} ${cy-ry} A ${rx} ${ry} 0 1 1 ${cx} ${cy-ry-0.001}`).attr({'stroke-width': 14, 'stroke': '#61dafb', 'transform': 'r-120'});
+      paper.circle(cx, cy, rs).attr({'fill':'#61dafb',"transform":"t-150,-50",'stroke':"none"});
+      //vue
+       let paper2=Raphael(W/2, 0, W/2, H);
+       cx = W/4,cy=H/2;
+       rx = 300,ry=258;
+       console.log(cx)
+       let A2 = paper2.path(`M ${cx} ${cy-ry/2} L ${cx-rx/2} ${cy-ry/2} L ${cx} ${cy+ry/2} L ${cx+rx/2} ${cy-ry/2} Z`)
+      .attr({"fill":"#41b883",stroke:"none"}).clone();
+       let A3 =A2.attr({'fill':'#35495e',"transform":`s0.6t0,${-(ry*0.333)}`,'stroke':"none"}).clone();
+       A3.attr({'fill':'#fff',"transform":`s0.25t0,${-ry*1.5}`,'stroke':"none"})
+    };
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

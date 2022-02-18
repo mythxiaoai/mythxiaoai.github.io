@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js"></script>
+		<link rel="stylesheet" href="../../../../css/animate.css" />
+		<script src="../../../../js/tip.js"></script>
+	</head>
+	<style>
+	  *{
+	    padding: 0;
+	    margin: 0;
+	  }
+	  body,html{
+	    height: 100%;
+	    width: 100%;
+	    font-size: 0;
+	  }
+	  #can{
+	    background:url("img/game_bg_2_hd.jpg") no-repeat center;
+	    background-size: cover;
+	  }
+	</style>
+	<body>
+	  <canvas id="can" height="500"></canvas>
+	  <script src="js/res.js"></script>
+	  <script src="js/Spirit.js"></script>
+	  <script src="js/Fish.js"></script>
+	  <script src="js/Shark.js"></script>
+	  <script src="js/WBC.js"></script>
+	  <script src="js/Cannon.js"></script>
+	  <script src="js/Web.js"></script>
+	  <script src="js/Bullet.js"></script>
+	  <script src="js/Button.js"></script>
+	  <script src="js/Coin.js"></script>
+	  <script src="js/Score.js"></script>
+	  <script>
+      window.onload =async function(){
+        let canvasDom =$("#can").attr({width:window.innerWidth,height:window.innerHeight})[0]
+        let gd =canvasDom.getContext("2d");
+	      //数据
+        await loadres();
+        
+        
+        
+       //炮台
+       let data_bar = res.bottom.bottom_bar;
+       let bottom_bar  = new Spirit({
+        img:data_bar.img,
+        w:data_bar.frame.w,
+        h:data_bar.frame.h,
+        x:canvasDom.width/2,
+        y:canvasDom.height-data_bar.frame.h/2+2,
+       });
+       //初始金币和穿甲弹
+       let score = 100;
+        let scores =Score.initscore(canvasDom.width,canvasDom.height) ,coins=[];
+        Score.setscore(scores,score);
+        //当前金币
+        let scorecurr=[];
+        window.scorecurr = scorecurr;
+       //穿甲弹
+       let btn = 3;
+       
+       //网
+       let webs = [];
+       setInterval(()=>{
+         //网
+         webs.shift()
+         if(webs.length>5){
+           webs.length=5;
+         }
+       },400);
+       //鱼
+       let fishs = [];
+       let delfishs = [];
+       setInterval(()=>{
+         let fish = new Fish(Math.floor(Math.random()*5)+1);
+         if(Math.random()<0.5){
+           fish.x = -fish.w;
+           fish.y = Math.floor(Math.random()*canvasDom.height);
+           fish.r = Math.floor(Math.random()*40)+70;
+         }else{
+           fish.x = canvasDom.width+fish.w;
+           fish.y = Math.floor(Math.random()*canvasDom.height);
+           fish.scaleY =-1;
+           fish.r = -Math.floor(Math.random()*40)-70;
+         }
+         fishs.push(fish)
+       },200);
+       //鲨鱼
+       setInterval(()=>{
+         let shark = new Shark(Math.floor(Math.random()*2)+1);
+         if(Math.random()<0.5){
+           shark.x = -shark.w;
+           shark.y = Math.floor(Math.random()*canvasDom.height);
+           shark.r = Math.floor(Math.random()*40)+70;
+         }else{
+           shark.x = canvasDom.width+shark.w;
+           shark.y = Math.floor(Math.random()*canvasDom.height);
+           shark.scaleY =-1;
+           shark.r = -Math.floor(Math.random()*40)-70;
+         }
+         fishs.push(shark)
+       },5000);
+       //炮
+       let bulletMark = true;//子弹锁
+       let bulletMark2 = false;//炮动画锁
+       let bullets = []
+       let steptime = 200;//开炮间隔
+       let bulletEvent = "click";//发炮事件
+       let isbulletHide = true;
+       let cannon = new Cannon(1);
+       cannon.x=canvasDom.width/2+42;
+       cannon.y=canvasDom.height-data_bar.frame.h/3;
+       //炮跟鼠标转
+       canvasDom.addEventListener("mousemove",function(e){
+          let x =e.pageX - cannon.x;
+         let y =e.pageY - cannon.y;
+         if(y<0){
+           cannon.r = - Math.atan(x/y)*180/Math.PI;
+         }else{
+           cannon.r =  Math.atan(x/y)*180/Math.PI;
+         }
+       },false);
+       //开炮
+       let aDom = document.createElement("audio");
+       aDom.src = "snd/cannon.mp3";
+       aDom.volume=.1;
+       let aDom2 = document.createElement("audio");
+       aDom2.src = "snd/coin.wav";
+       let st = Date.now();
+       openBulletEvent(bulletEvent);
+       function openBulletEvent(bulletEvent){
+         $(canvasDom).on(bulletEvent,function(e){
+          if(bulletMark&&(Date.now()-st)>steptime){
+          	
+          	//减分
+          	if((score-cannon.type)>=0){
+	            Score.setscore(scores,score-=cannon.type);
+	            //音效
+	            aDom.currentTime=0;
+	            aDom.play();
+	            st = Date.now();
+	            bulletMark2 =true;
+	            //子弹
+	            let bullet = new Bullet(cannon.type);
+	            bullet.x =cannon.x
+	            bullet.y =cannon.y
+	            bullet.r =cannon.r
+	            bullets.push(bullet);
+          	}else{
+          		if(confirm("要不要在来点金币？"))Score.setscore(scores,score+=100);
+          	}
+          }
+        });
+       }
+       //按钮
+       let minus = new Button("minus");
+       minus.x = cannon.x - 45;
+       minus.y = cannon.y+5;
+       let plus = new Button("plus");
+       plus.x = cannon.x+45;
+       plus.y = cannon.y+5;
+        canvasDom.addEventListener("mousedown",function(e){
+          if(minus.check(e.pageX,e.pageY)){
+            bulletMark = false;
+            minus.down();
+            if(cannon.type>1){
+              cannon.setType(--cannon.type)
+            }
+          }
+          if(plus.check(e.pageX,e.pageY)){
+            bulletMark = false;
+            plus.down();
+            if(cannon.type<7){
+              cannon.setType(++cannon.type)
+            }
+          }
+       },false);
+        canvasDom.addEventListener("mouseup",function(e){
+          setTimeout(()=>{
+            bulletMark = true;
+          },0);
+          minus.up();
+          plus.up();
+       },false);
+       
+       //模式切换
+       xtip("按键盘123~有彩蛋~")
+       $(document).on("keydown",(e)=>{
+         if(e.key=="1"){
+           xtip("普通模式~");
+           steptime = 200;//开炮间隔
+           bulletEvent = "click";//发炮事件
+           isbulletHide = true;
+           $(canvasDom).unbind("click mousemove")
+           openBulletEvent(bulletEvent);
+         }
+         if(e.key=="2"){
+           xtip("穿甲模式~")
+           steptime = 200;//开炮间隔
+           bulletEvent = "click";//发炮事件
+           isbulletHide = false;
+           $(canvasDom).unbind("click mousemove")
+           openBulletEvent(bulletEvent);
+         }
+         if(e.key=="3"){
+           xtip("疯狂模式~")
+           score=9999999;
+           steptime =50 ;//开炮间隔
+           bulletEvent = "mousemove";//发炮事件
+           isbulletHide = false;
+           $(canvasDom).unbind("click mousemove")
+           openBulletEvent(bulletEvent);
+         }
+       });
+       
+       
+       //绘制
+       (function next(){
+         gd.clearRect(0,0,canvasDom.width,canvasDom.height);
+        //绘制
+         //鱼
+        fishs.map((f,i)=>{
+           f.draw(gd);
+           f.move();
+           f.selfFame()
+           if(f.outWin(canvasDom.width,canvasDom.height)){
+             fishs.splice(i,1);
+           }
+         })
+        //死鱼
+        delfishs.map((f,i)=>{
+           f.draw(gd);
+           if(f.delFame()){
+             delfishs.splice(i,1);
+           }
+         })
+         //底座
+         bottom_bar.draw(gd);
+         //按钮
+         plus.draw(gd);
+         minus.draw(gd);
+         //数字
+         scores.map((s,i)=>{
+           s.draw(gd);
+         })
+        //子弹
+        bullets.map((b,i)=>{
+           b.draw(gd);
+           b.move();
+           if(b.outWin(canvasDom.width,canvasDom.height)){
+             bullets.splice(i,1);
+           }
+         })
+        //炮
+        cannon.draw(gd);
+        //炮动画
+        if(bulletMark2&&cannon.selfFame()){
+          bulletMark2 = false;
+        }
+         //网
+        webs.map((w)=>{
+           w.draw(gd);
+        })
+        //金币
+        coins.map((cs,i)=>{
+           cs.map((c,j)=>{
+             c.draw(gd);
+             let b = c.selfFame();
+             c.move()
+             if(b){
+               c.speed=10;
+               if(c.outWin(canvasDom.width,canvasDom.height)){
+                 cs.splice(j,1);
+                 if(cs.length==0){
+                   coins.splice(i,1);
+                 }
+               }
+             }
+          })
+        })
+        //当前金币
+        scorecurr.map((ss,i)=>{
+          ss.map((s,j)=>{
+            s.draw(gd);
+            s.move();
+            if((s.oy-s.y)>=100){
+             scorecurr.splice(i,1);  
+            }
+          });
+        })
+         //打击判定
+         fishs.map((f,i)=>{
+            bullets.map((b,j)=>{
+              if(f.hit(b)){
+              //碰撞成功
+                //子弹消失
+                //执行打中动画
+                //产生蜘蛛网
+                //产生金币
+                //网
+                let web = new Web(b.type);
+                web.x = (f.x+b.x)/2
+                web.y = (f.y+b.y)/2
+                webs.push(web);
+                //子弹耗尽
+                if(isbulletHide){
+                  f.life+=b.life;
+                  bullets.splice(j,1);
+                }else{
+                  f.life=0;
+                }
+               
+                //捕鱼判断
+                if(f.life<=0){
+                  //音效
+                  aDom2.currentTime=0;
+                  aDom2.play();
+                  //金币
+                  coins.push(Coin.getCoin(f.olife,web.x,web.y,canvasDom.width,canvasDom.height))
+                  delfishs.push(f);
+                  //炮台数字
+                  score+=f.olife;
+                  Score.setscore(scores,score);
+                  //+的数字
+                  scorecurr.push(Score.setscore2(f.olife,web.x,web.y));
+                  //鱼剔除
+                  fishs.splice(i,1);
+                }
+              }
+           })
+         })
+         requestAnimationFrame(next)
+       })()
+      }
+	    
+	  </script>
+	</body>
+</html>

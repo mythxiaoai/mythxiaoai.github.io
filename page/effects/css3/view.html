@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+	  *{
+	    margin: 0;
+	    padding: 0;
+	  }
+	  .content{
+	    position: absolute;
+	    height: 100%;
+	    width: 100%;
+	  }
+	  .box{
+	    position: absolute;
+	    width: 200px;
+	    height: 200px;
+	    background: #ccc;
+	  }
+	</style>
+	<body>
+	  <div class="content">
+	    <div class="box a" style="background: #ccc;left: 60px;top: 90px;z-index: 1;"></div>
+	    <div class="box b" style="background: red;left: 120px;top: 340px;z-index: 2;"></div>
+	    <div class="box c" style="background: yellow;left:250px;top: 100px;z-index: 3;"></div>
+	    <div class="box d" style="background: pink;left: 150px;top: 200px;z-index: 4;"></div>
+	  </div>
+	</body>
+	<script>
+	  let doms = document.querySelectorAll(".box");
+	  doms = Array.from(doms);
+	  let oldO = doms.map(dom =>{
+	    return {
+	      left:dom.offsetLeft,
+	      top:dom.offsetTop,
+	    }
+	  });
+	  document.addEventListener("mousemove",function(e){
+	    doms.forEach((dom,index)=>{
+	      dom.style.left = oldO[index].left+(e.clientX*dom.style.zIndex)/50+"px";
+	      dom.style.top =  oldO[index].top+(e.clientY*dom.style.zIndex)/50+"px";
+	    })
+	  },false)
+	  console.log(oldO);
+	</script>
+</html>

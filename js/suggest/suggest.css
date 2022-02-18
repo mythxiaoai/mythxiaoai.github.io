@@ -1,0 +1,31 @@
+.suggest_ul{
+	min-height: 38px;
+	position: absolute;
+	box-shadow:0 2px 5px 0 rgba(0,0,0,0.16);
+	border-radius: 4px;
+	z-index: 10;
+	background: #fff;
+}
+.suggest_ul>a:first-child{
+	border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+.suggest_ul:after{
+content: "\f110";
+display: inline-block;
+font: normal normal normal 14px/1 FontAwesome;
+font-size: inherit;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+position: absolute;
+font-size: 18px;
+width: 18px;
+height: 18px;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+animation: fa-spin 2s infinite linear;
+z-index: -1;
+}

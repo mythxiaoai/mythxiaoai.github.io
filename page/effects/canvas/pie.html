@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	  <canvas id="canvas" width="500" height="500"></canvas>
+	</body>
+</html>
+<script>
+  let cx=250,cy=250,r=100;
+  let gd=canvas.getContext("2d");
+  let a1 = 30;
+  //画线
+ let datas=[
+    {value:200,color:"#FC0"},
+    {value:100,color:"#CF0"},
+    {value:50,color:"#0FC"},
+ ]
+ let sum = 0;
+datas.forEach(v=>{
+ sum+=v.value;
+})
+let now = 0;
+datas.forEach(v=>{
+  let snow = now;
+  now +=v.value/sum*360;
+ pie(cx,cy,snow,now,v.color);
+})
+ console.log(sum)
+ function pie(cx,cy,strAng,endAng,color){
+    gd.beginPath();
+    let x = cx+Math.cos(strAng*Math.PI/180)*r;
+    let y = cy+Math.sin(strAng*Math.PI/180)*r;
+    //#1
+    gd.moveTo(cx, cy);
+    gd.lineTo(x, y);
+  
+    //#2
+    gd.arc(cx, cy, r, strAng*Math.PI/180, endAng*Math.PI/180, false);
+  
+    //#3
+    gd.closePath();
+    gd.fillStyle=color;
+    gd.fill()
+ }
+</script>

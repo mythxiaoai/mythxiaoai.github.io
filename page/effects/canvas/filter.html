@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style media="screen">
+			body {text-align:center;}
+    #c1 {background:white;}
+		</style>
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			window.onload=function (){
+      let oC=document.getElementById('c1');
+      let gd=oC.getContext('2d');
+      let W=oC.width,H=oC.height;
+			let data = null;
+			let imageData = null;
+			
+      let oImg=new Image();
+      oImg.src='2.jpg';
+
+      oImg.onload=function (){
+			 	gd.drawImage(oImg, 0, 0);
+				let imageData=gd.getImageData(0, 0, W, H);
+				data=imageData.data;
+				gd.putImageData(imageData, 0, 0);
+				
+				$("input").on("change",function(){
+					if(this.value==1){
+						gd.drawImage(oImg, 0, 0);
+						imageData=gd.getImageData(0, 0, W, H);
+						data=imageData.data;
+					}else if(this.value==2){
+						//高光
+						gd.drawImage(oImg, 0, 0);
+						imageData=gd.getImageData(0, 0, W, H);
+						data=imageData.data;
+						for(let r=0;r<H;r++){
+						  for(let c=0;c<W;c++){
+						    //(r*W+c)*4+0       =>    r
+						    //(r*W+c)*4+1       =>    g
+						    //(r*W+c)*4+2       =>    b
+						    //(r*W+c)*4+3       =>    a
+						    data[(r*W+c)*4+0]=data[(r*W+c)*4+1]=data[(r*W+c)*4+2]=
+						    2.0*(data[(r*W+c)*4+0]+data[(r*W+c)*4+1]+data[(r*W+c)*4+2])/3;
+						  }
+						}
+					}else if(this.value==3){
+						//黑白
+						gd.drawImage(oImg, 0, 0);
+						imageData=gd.getImageData(0, 0, W, H);
+						data=imageData.data;
+						 //黄=>扔掉蓝色
+						for(let r=0;r<H;r++){
+						  for(let c=0;c<W;c++){
+						    //(r*W+c)*4+0       =>    r
+						    //(r*W+c)*4+1       =>    g
+						    //(r*W+c)*4+2       =>    b
+						    //(r*W+c)*4+3       =>    a
+						    data[(r*W+c)*4+0]=data[(r*W+c)*4+1]=data[(r*W+c)*4+2]=
+						    (data[(r*W+c)*4+0]+data[(r*W+c)*4+1]+data[(r*W+c)*4+2])/3;
+						  }
+						}
+						
+					}else if(this.value==4){
+						//老照片
+						gd.drawImage(oImg, 0, 0);
+						imageData=gd.getImageData(0, 0, W, H);
+						data=imageData.data;
+						  for(let r=0;r<H;r++){
+						  for(let c=0;c<W;c++){
+						    //(r*W+c)*4+0       =>    r
+						    //(r*W+c)*4+1       =>    g
+						    //(r*W+c)*4+2       =>    b
+						    //(r*W+c)*4+3       =>    a
+						    imageData.data[(r*W+c)*4+2]=0;
+						  }
+						}
+						
+						imageData.data=data;
+					}
+					gd.putImageData(imageData, 0, 0);
+				});
+      };
+    };
+    </script>
+	</head>
+	<body>
+		<canvas id="c1" width="600" height="374"></canvas>
+		<div>
+			<label><input type="radio" name="type" value="1" checked="checked" />原始</label>
+			<label><input type="radio" name="type" value="2" />高光</label>
+			<label><input type="radio" name="type" value="3" />黑白</label>
+			<label><input type="radio" name="type" value="4" />老照片</label>
+		</div>
+	</body>
+</html>
