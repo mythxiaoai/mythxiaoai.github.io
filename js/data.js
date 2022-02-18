@@ -262,14 +262,15 @@ export default [
             //     "pid": "30",
             //     "order":"2"
             // },
-            {
-                "id": "33",
-                "name": "留言板",
-                "url": "page/project/QQ/index.html",
-                "icon": "fa fa-commenting-o",
-                "pid": "30",
-                "order": "3"
-            }, {
+            // {
+            //     "id": "33",
+            //     "name": "留言板",
+            //     "url": "page/project/QQ/index.html",
+            //     "icon": "fa fa-commenting-o",
+            //     "pid": "30",
+            //     "order": "3"
+            // },
+             {
                 "id": "34",
                 "name": "顶置(副导航)",
                 "url": "page/project/top/index.html",
