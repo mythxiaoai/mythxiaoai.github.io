@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>文本对比</title>
+		<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon"/>
+		<link href="js/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="js/bootstrap/bootstrapfiller.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+	<style>
+		del {
+		    background-color: #ffc6c6;
+		}
+		ins {
+		     background-color: #c6ffc6;
+    		text-decoration: none;
+    		padding:0 5px;
+		}
+	</style>
+	</head>
+	<body class="gray-bg">
+		<div class="p-md">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ipanel">
+						<div class="ipanel-heading">
+							<h5 class="ipanel-title">文本对比</h5>
+						</div>
+						<div class="ipanel-content">
+							<blockquote class="m-b-sm fz12">
+								1.当文本域的文本发生变化时，自动实时输出结果。<br>
+								2.可以将EXCEl的表格复制粘贴至原文本中<br>
+								3.如需优化可邮箱  774813571@qq.com
+							</blockquote>
+							<div class="row diff-wrapper2">
+								<div class="col-sm-12">
+									<div class="col-md-4">
+										<h4 class=".h4 text-center m-sm fw600">原文本</h4>
+										<div placeholder="请粘贴原始文本..." contenteditable="true" style="min-height: 200px;height: auto;" class="form-control diff-textarea" id="original">
+											<table width="216" height="76" style="width: 162pt;">
+												<colgroup><col width="72">
+												<col width="72">
+												<col width="72">
+												</colgroup><tbody><tr height="19">
+												<td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">序号</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">名称</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">数量</td>
+												</tr>
+												<tr height="19">
+												<td class="et2" x:num="1" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">1</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">菜篮子</td><td class="et2" x:num="5" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">5</td>
+												</tr>
+												<tr height="19">
+												<td class="et2" x:num="2" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">2</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">西瓜</td><td class="et2" x:num="6" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">6</td>
+												</tr>
+												<tr height="19">
+												<td class="et2" x:num="3" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">3</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">番茄</td><td class="et2" x:num="5" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">5</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<h4 class=".h4 text-center m-sm fw600">对比结果</h4>
+										<div class="diff2"></div>
+									</div>
+									<div class="col-md-4">
+										<h4 class=".h4 text-center m-sm fw600">新文本</h4>
+										<div placeholder="请粘贴修改后文本..." contenteditable="true" style="min-height: 200px;height: auto;" class="form-control diff-textarea" id="changed">
+											<table width="216" height="57" style="width: 162pt;">
+												<colgroup><col width="72">
+												<col width="72">
+												<col width="72">
+												</colgroup><tbody><tr height="19">
+												<td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">序号</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">名称</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">数量</td>
+												</tr>
+												<tr height="19">
+												<td class="et2" x:num="1" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">1</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">菜篮子</td><td class="et2" x:num="5" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">5</td>
+												</tr>
+												<tr height="19">
+												<td class="et2" x:num="3" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">3</td><td class="et2" x:str="" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">番茄</td><td class="et2" x:num="3" height="19" width="72" style="color: rgb(0, 0, 0); font-size: 11pt; vertical-align: middle; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); height: 14.25pt; width: 54pt;">3</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap/bootstrap.js"></script>
+		<script src="js/diff_match_patch/diff_match_patch.js"></script>
+		<script src="js/preetyTextDiff/jquery.pretty-text-diff.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$(".diff-wrapper2").prettyTextDiff({
+					originalContent: $("#original").text(),
+					changedContent: $("#changed").text(),
+					diffContainer: ".diff2"
+				});
+				$(".diff-textarea").on("change keyup", function() {
+					$(".diff-wrapper2").prettyTextDiff({
+						originalContent: $("#original").text(),
+						changedContent: $("#changed").text(),
+						diffContainer: ".diff2"
+					})
+				})
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>恋爱ing~</title>
+		<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon"/>
+	</head>
+	<style>
+		@font-face {
+			font-family:myth;
+			src: url(css/汉仪良品线简5.0.ttf);
+		}
+    *{padding: 0;margin: 0;}
+		body{background: #333;font-family:myth;}
+		#showenai{height: 100px;width:100%;text-align:center;color:plum;text-shadow:3px 3px 15px #fff;line-height:1.625;font-size: 50px;position: absolute;top: -30%;bottom: 0;margin: auto 0;}
+	</style>
+	<body>
+		<div id="showenai"></div>
+	</body>
+	
+	<script>
+		//起始时间
+		var start=new Date("2014/5/20");
+		setInterval(function(){
+			var today = new Date();
+			var result=today-start;
+			var r1=fmt(result);
+			showenai.innerHTML="恋爱ing:"+r1.y+"年"+r1.mon+"月"+r1.h+"小时"+r1.m+"分"+r1.s+"秒"
+			showenai.innerHTML+="<br>恋爱ing:"+r1.d+"天"
+		},1000);
+		
+		function fmt(ms){
+			var r ={};
+			r.y =ms/1000/60/60/24/30/12|0;
+			r.mon =ms/1000/60/60/24/30%12|0;
+			r.d =ms/1000/60/60/24|0;
+			r.h =ms/1000/60/60%24|0;
+			r.m =ms/1000/60%60|0;
+			r.s =ms/1000%60|0;
+			return r;
+		}
+	</script>
+</html>
