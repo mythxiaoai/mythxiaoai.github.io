@@ -307,14 +307,15 @@ export default [
                 "icon": "fa fa-legal",
                 "pid": "40",
                 "order": "3"
-            }, {
-                "id": "50",
-                "name": "关于作者",
-                "url": "page/about/index.html",
-                "icon": "fa fa-envelope-o",
-                "pid": "",
-                "order": "4"
-            }
+            },
+            //  {
+            //     "id": "50",
+            //     "name": "关于作者",
+            //     "url": "page/about/index.html",
+            //     "icon": "fa fa-envelope-o",
+            //     "pid": "",
+            //     "order": "4"
+            // }
         ],
         "auth": {}
     }
