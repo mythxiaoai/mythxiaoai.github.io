@@ -1,0 +1,31 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请点播放按钮~有点慢，请稍等~</title>
+    <style>
+        *{padding: 0;margin:0}
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="id_test_video" style="width:100%; height:100%;"></div>
+    <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.3.2.js" charset="utf-8"></script>
+    <script>
+       var player = new TcPlayer('id_test_video', {
+"mp4"   : "./e831849df2b28c17dc48733291847559.mp4",//请替换成实际可用的播放地址
+"autoplay" : true,      //iOS 下 safari 浏览器是不开放这个能力的
+"wording": {
+    2032: "请求视频失败，请检查网络",
+    2048: "请求m3u8文件失败，可能是网络错误或者跨域问题"
+},
+"width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
+"height" : 'auto',//视频的显示高度，请尽量使用视频分辨率高度
+"onload":function(){document.title="点击播放"}
+});
+    </script>
+</body>
+</html>

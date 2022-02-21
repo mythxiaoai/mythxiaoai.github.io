@@ -1,0 +1,145 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>舒尔特训练法 训练注意力</title>
+    <meta name="description" content="舒尔特训练法，是世界上最专业最普及最简略的训练法，普遍利用于飞翔员航天员的训练，也是学生提高注意力的有效训练法，此法保持一段时光就会觉得很显明的提高。" />
+    <style>
+    *{padding:0;margin:0;box-sizing:border-box;}
+    body,html{height:100%;width:100%;background:#eaeaea;font-size:0.625rem;color:#333;word-wrap:break-word;;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+    .container{width:40%;margin:0 auto;text-align:center;font-weight:200;}
+    @media (max-width:768px){.container{width:100%;}
+    html{font-size:0.5rem;}
+    }
+    /*滚动条*/
+    ::-webkit-scrollbar-track{background-color:#f5f5f5;}
+    ::-webkit-scrollbar{width:6px;background-color:#f5f5f5;}
+    ::-webkit-scrollbar-thumb{background-color:#999;}
+    ::-moz-scrollbar-track{background-color:#f5f5f5;}
+    ::-moz-scrollbar{width:6px;background-color:#f5f5f5;}
+    ::-moz-scrollbar-thumb{background-color:#999;}
+    ::-o-scrollbar-track{background-color:#f5f5f5;}
+    ::-o-scrollbar{width:6px;background-color:#f5f5f5;}
+    ::-o-scrollbar-thumb{background-color:#999;}
+    ::-ms-scrollbar-track{background-color:#f5f5f5;}
+    ::-ms-scrollbar{width:6px;background-color:#f5f5f5;}
+    ::-ms-scrollbar-thumb{background-color:#999;}
+    .btn{display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:normal;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;touch-action:manipulation;cursor:pointer;user-select:none;background-image:none;border:1px solid transparent;border-radius:4px;}
+    a,button{outline:none;border:0;}
+    /*按钮*/
+    .btn-default,.btn-default:focus,.btn-default:hover,.btn-default:active{background-color:#ffffff;color:#757575;}
+    .btn{border-radius:2px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);-webkit-transition:box-shadow linear 0.4s;-moz-transition:box-shadow linear 0.4s;-ms-transition:box-shadow linear 0.4s;transition:box-shadow linear 0.4s;display:inline-block;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid transparent;border-radius:0.25rem;}
+    .btn:hover{-webkit-box-shadow:none;box-shadow:none;border-color:transparent;}
+    .btn:active,.btn:focus{border-color:transparent;}
+    .btn:active:focus{border-color:transparent;}
+    .btn:focus,.btn:hover{text-decoration:none;}
+    .large{font-size:1.8rem;padding:1rem 3rem;}
+    .opts{margin-top:8rem;margin-bottom:1.5rem;}
+    /*页面*/
+    .body{width:100%;height:0;padding-top:100%;position:relative;font-size:0;}
+    .body .box{position:absolute;width:100%;height:100%;top:0;left:0;}
+    .item{width:20%;display:inline-block;position:absolute;transition:all 1.2s cubic-bezier(0.165,0.84,0.44,1);cursor:pointer;background:rgba(255,255,255,1);}
+    .item:hover{background:rgba(255,255,255,0.7);}
+    .item .box{width:100%;height:0;padding-top:100%;position:relative;display:inline-block;border:1px solid #eaeaea;border-bottom:none;border-right:none;}
+    .item .box span{position:absolute;width:100%;height:100%;top:0;left:0;align-items:center;display:flex;justify-content:center;font-size:6rem;color:#aaa;}
+    .item.active{background:rgba(255,255,255,0.5);}
+    .tip{padding:1rem;font-size:1.4rem;font-weight:400;color:#666;}
+    .des{text-align:justify;padding:0 .8rem;font-size:1.2rem;color:#999;line-height:1.5;font-weight:400;margin-bottom:1.5rem}
+    .tc{text-align:center;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="opts">
+        <button class="btn btn-default large js_reset">Reset</button>
+      </div>
+
+      <div class="body">
+        <div class="box js_Box">
+          <!-- <div class="item"><div class="box"><span>1</span></div></div> -->
+        </div>
+      </div>
+
+      <div class="tip">持续时间:<span class="js_time">00:00</span>s</div>
+      <div class ="des">
+        <p>舒尔特训练法，是世界上最专业最普及最简略的训练法，普遍利用于飞翔员航天员的训练，也是学生提高注意力的有效训练法，此法保持一段时光就会觉得很显明的提高。</p>
+
+        <p>舒尔特方格是在一张方形卡片上画上1CM × 1CM 的25 个方格(注意:方格必定是要这个尺寸的)，格子内任意填写上阿拉伯数字1 ― 25 的共25 个数字。训练时，请求被测者用手指按1 ― 25 的次序依次指出其地位，同时诵读出声。舒尔特方格不仅可用来测量儿童注意力的稳固性，而且用这套图表保持天天练习一遍，那么孩子注意力水平就能得到大幅度提高。应用这种方式的时侯，家长可以自制几套卡片，绘制表格，任意填上数字。从１开端，边念边指出相应的数字，直到２５为止。同时诵读出声，施测者一旁记载所用时光。数完25 个数字所用光阴越短，注意力水平越高。以12 ―― 14 岁年龄组为例，能到达16 ＂以上为优良，学习成就应是名列前茅，26 ＂属于中等水平，班级排名会在中游或偏下，36 ＂则问题较大，测验会呈现不合格现象。18 岁及以上成年人最好可到达8 ＂的程度，20 ＂为中等程度。</p>
+        
+        <p>注意：</p>
+        
+        <p>1. 国际通用的格子尺寸为5*5（25格），卡片大小为7cm*7cm。尺寸大小直接影响测试结果，尺寸增大或者缩小了，就改变了眼睛扫视的距离，就达不到训练的效果。测试是为了有兴趣有效率的训练，而不是难为孩子。只是了为增加趣味性制作各式各样的格子和孩子玩玩也是可以的</p>
+        
+        <p>2. 为避免长时间训练一个方格产生记忆，要多做一些不同顺序的方格。</p>
+        
+        <p>3. 避免孩子对此产生抵触心理。要让孩子感兴趣，如：和孩子比赛</p>
+        
+        <p>4. 训练的结果是看时间的长短，而不是格子的多少。我国的飞行员平均时间在6.25秒以内，杨利伟是我国用时最短的，时间为3.04秒。</p>
+      </div>
+      <div class ="des tc">——欢迎体验——</div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      let innerHTML = "",indexNum=1,timer,startTime;
+      for (let index = 1; index < 26; index++) {
+        innerHTML += `<div class="item js_item"><div class="box"><span>${index}</span></div></div>`;
+      }
+      $(".js_Box").append(innerHTML);
+
+      $(".js_reset").click(random);
+      
+      random();
+      
+      $(".js_Box").on("click",".js_item",function(){
+          console.log(indexNum);
+          //依次判断
+          if($(this).text()==1){
+            initData()
+            startTime = Date.now();
+            (function run(){
+                let time = ((Date.now() - startTime)/1000).toFixed(2);
+                $(".js_time").text(time);
+                timer = requestAnimationFrame(run);
+            })();
+          }
+          //样式
+          if($(this).text() == indexNum){
+              $(this).addClass("active");
+              indexNum++;
+          }
+          //终止
+          if($(this).text() == 25 &&indexNum==26){
+            cancelAnimationFrame(timer);
+          }
+      });
+
+      function random() {
+        initData();
+        let dom = $(".js_item")
+          .toArray()
+          .sort((v) => (Math.random() > 0.5 ? -1 : 1));
+        $(".js_Box").append(dom);
+        //动画
+        let width = $(".js_item").width();
+        let boxWidth = $(".js_Box").width();
+        let num = Math.round(boxWidth / width);
+        //移动到中间
+        let half = boxWidth / 2 - width / 2;
+        $(".js_item").css({ left: half, top: half });
+        $(".js_item").each(function (index) {
+          let top = Math.floor(index / num);
+          $(this).css({ left: (index % num) * width, top: top * width });
+        });
+      }
+
+      function initData(){
+        indexNum =1;
+        $(".js_time").text("00:00")
+        $(".js_item").removeClass("active");
+        if(timer)cancelAnimationFrame(timer);
+        timer = null;
+      }
+      
+    </script>
+  </body>
+</html>
