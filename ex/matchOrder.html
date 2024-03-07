@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>pdf文本内容订单提取</title>
 </head>
 <style>
   #content {
@@ -8832,19 +8832,19 @@ Order ID: 576595205957849788
   <script src="https://cdn.bootcss.com/FileSaver.js/1.3.8/FileSaver.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
   <script>
-    let arr1, arr2, arr3;
+    let arr1=[], arr2=[], arr3=[];
     function run(dom) {
       let str = dom.value;
       console.log(str)
-      arr1 = str.match(/9400[\d\s].*/gm);
+      arr1 = str.match(/9400[\d\s].*/gm)||[];
       arr1 = arr1.map(v => v.replace(/\D/igm, ""));
       result1.value = arr1.join("\n")
       arr1Msg.innerHTML = arr1.length;
-      arr2 = str.match(/Order ID:.*([\d].*)/gm);
+      arr2 = str.match(/Order ID:.*([\d].*)/gm)||[];
       arr2 = arr2.map(v => v.replace(/\D/igm, ""));
       result2.value = arr2.join("\n")
       arr2Msg.innerHTML = arr2.length
-      arr3 = str.match(/Qty Total:.*([\d].*)/gm);
+      arr3 = str.match(/Qty Total:.*([\d].*)/gm)||[];
       arr3 = arr3.map(v => v.replace(/\D/igm, ""));
       result3.value = arr3.join("\n")
       arr3Msg.innerHTML = arr3.length;
