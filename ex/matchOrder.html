@@ -8838,22 +8838,22 @@ Order ID: 576595205957849788
     let arr1=[], arr2=[], arr3=[];
     function run(dom) {
       let str = dom.value;
-      console.log(str)
       arr1 = str.match(/9400[\d\s]+/gm)||[];
       arr1 = arr1.map(v => v.replace(/\D/igm, ""));
       result1.value = arr1.join("\n")
       arr1Msg.innerHTML = arr1.length;
-      arr2 = str.match(/Order.*([\d]+)/gm)||[];
+      arr2 = str.match(/Order.*([\d]{5,})/gm)||[];
       arr2 = arr2.map(v => v.replace(/\D/igm, ""));
+      arr2 = Array.from(new Set(arr2));
       result2.value = arr2.join("\n")
       arr2Msg.innerHTML = arr2.length
-      arr3 = str.match(/Total.*([\d]+)/gm)||[];
+      arr3 = str.match(/Total.{0,3}([\d]+)\b/gm)||[];
       arr3 = arr3.map(v => v.replace(/\D/igm, ""));
       result3.value = arr3.join("\n")
       arr3Msg.innerHTML = arr3.length;
     }
     function download() {
-      let json = [{ "姓名": "小艾", "年龄": 18 }];
+      let json = [];
       let fields = ["单号", "订单ID", "数量"];
 
       json = arr1.map((v, i) => {
