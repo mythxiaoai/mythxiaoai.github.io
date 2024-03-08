@@ -8840,6 +8840,7 @@ Order ID: 576595205957849788
       let str = dom.value;
       arr1 = str.match(/9400[\d\s]+/gm)||[];
       arr1 = arr1.map(v => v.replace(/\D/igm, ""));
+      arr1 = Array.from(new Set(arr1));
       result1.value = arr1.join("\n")
       arr1Msg.innerHTML = arr1.length;
       arr2 = str.match(/Order.*([\d]{5,})/gm)||[];
