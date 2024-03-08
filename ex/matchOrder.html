@@ -30,7 +30,10 @@
 
 <body>
   <div>
-   <h2> pdf内容填充：</h2>
+    <h2> step1：pdf-orc转换</h2>
+  <p>💖 <a href="https://www.pdf2go.com/pdf-to-text" target="https://www.pdf2go.com/pdf-to-text">https://www.pdf2go.com/pdf-to-text</a>(一定要勾选orc选项)✨</p>
+  <p>💖 <a href="https://tools.pdf24.org/en/ocr-pdf" target="https://tools.pdf24.org/en/ocr-pdf">https://tools.pdf24.org/en/ocr-pdf</a>(一定要勾选orc选项)</p>
+   <h2> step2：pdf文本填充：</h2>
     <textarea id="content" onchange="run(this)" rows="10" autofocus>US POSTAGE aa aL BA
 PAIDimI r I Hf My
 03/07/2024 fal i ye
@@ -8812,7 +8815,7 @@ Order ID: 576595205957849788
 </textarea>
   </div>
   <div>
-    <h3>结果预览:</h3>
+    <h4>结果预览:</h4>
     <div class="result">
       <div>
         单号(<span id="arr1Msg"></span>)
@@ -8836,15 +8839,15 @@ Order ID: 576595205957849788
     function run(dom) {
       let str = dom.value;
       console.log(str)
-      arr1 = str.match(/9400[\d\s].*/gm)||[];
+      arr1 = str.match(/9400[\d\s]+/gm)||[];
       arr1 = arr1.map(v => v.replace(/\D/igm, ""));
       result1.value = arr1.join("\n")
       arr1Msg.innerHTML = arr1.length;
-      arr2 = str.match(/Order ID:.*([\d].*)/gm)||[];
+      arr2 = str.match(/Order.*([\d]+)/gm)||[];
       arr2 = arr2.map(v => v.replace(/\D/igm, ""));
       result2.value = arr2.join("\n")
       arr2Msg.innerHTML = arr2.length
-      arr3 = str.match(/Qty Total:.*([\d].*)/gm)||[];
+      arr3 = str.match(/Total.*([\d]+)/gm)||[];
       arr3 = arr3.map(v => v.replace(/\D/igm, ""));
       result3.value = arr3.join("\n")
       arr3Msg.innerHTML = arr3.length;
